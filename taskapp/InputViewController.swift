@@ -33,6 +33,7 @@ class InputViewController: UIViewController {
         titleTextField.text = task.title
         contentsTextView.text = task.contents
         datePicker.date = task.date as Date
+        categoryTextField.text = task.category
         
     }
     
@@ -47,6 +48,7 @@ class InputViewController: UIViewController {
             self.task.title = self.titleTextField.text!
             self.task.contents = self.contentsTextView.text
             self.task.date = self.datePicker.date as NSDate
+            self.task.category = self.categoryTextField.text!
             self.realm.add(self.task, update: true)
         }
         

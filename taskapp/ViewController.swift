@@ -14,6 +14,8 @@ import UserNotifications
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var categorySearchText: UITextField!
+    
     
     let realm = try! Realm()
     var taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: false)
@@ -29,6 +31,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: false)
+        categorySearchText.text = nil
         tableView.reloadData()
     }
 
@@ -36,6 +41,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func categorySearch(_ sender: Any) {
+        //taskArray = try! Realm().objects(Task.self).sorted(byKeyPath: "date", ascending: true)
+
+        if categorySearchText.text != nil{
+            taskArray = try! Realm().objects(Task.self).filter("category CONTAINS %@", categorySearchText.text!).sorted(byKeyPath: "date", ascending: false)
+
+            tableView.reloadData()
+        }
+
+        
+    }
+    
+    
     
     // MARK: UITableViewDataSourceプロトコルのメソッド
     // データの数（＝セルの数）を返すメソッド
@@ -49,7 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
         let task = taskArray[indexPath.row]
-        cell.textLabel?.text = task.title
+        cell.textLabel?.text = task.title + "[" + task.category + "]"
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"

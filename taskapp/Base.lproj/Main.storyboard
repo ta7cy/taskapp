@@ -62,6 +62,19 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="GX6-nn-U2c">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="eR9-hP-Tto">
+                            <connections>
+                                <action selector="categorySearch:" destination="BYZ-38-t0r" id="H9Q-DQ-X2o"/>
+                            </connections>
+                        </barButtonItem>
+                        <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="カテゴリ検索" textAlignment="natural" minimumFontSize="17" id="sSw-1h-Eno">
+                            <rect key="frame" x="65" y="7" width="245" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Y9j-WG-XaD">
                             <connections>
                                 <segue destination="DT8-gO-7S2" kind="show" id="Can-CI-JZQ"/>
@@ -69,6 +82,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="categorySearchText" destination="sSw-1h-Eno" id="yzN-1o-oJe"/>
                         <outlet property="tableView" destination="ZUs-jA-yVf" id="ddo-YS-RXi"/>
                         <segue destination="DT8-gO-7S2" kind="show" identifier="cellSegue" id="hjQ-lx-ThN"/>
                     </connections>
